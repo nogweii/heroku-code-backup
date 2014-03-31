@@ -26,11 +26,11 @@ def mirror_mirror_on_the_wall(app)
   if File.directory? git_dir
     # git clone exists already so we update it
     log "updating backup of #{app['name']}"
-    system(%W[git --git-dir #{git_dir} remote update])
+    system('git', *%W[--git-dir #{git_dir} remote update])
   else
     # directory doesn't exist! Make it
     log "creating git mirror of #{app['name']}"
-    system(%W[git clone --mirror #{app['git_url']} #{git_dir}])
+    system('git', *%W[clone --mirror #{app['git_url']} #{git_dir}])
   end
 
   # And always update the description & git daemon export files
